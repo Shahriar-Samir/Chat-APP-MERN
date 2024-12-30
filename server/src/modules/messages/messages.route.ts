@@ -4,7 +4,7 @@ import { auth } from '../../middlewares/auth';
 
 const router = express.Router();
 
-router.post('/', auth ,sendMessage);
+router.post('/', auth('messages'), sendMessage);
 
 const messageRoutes = router;
 

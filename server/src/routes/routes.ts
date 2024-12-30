@@ -2,6 +2,7 @@ import userRoutes from '../modules/users/user.route';
 import express from 'express';
 import authRoutes from '../modules/Auth/auth.route';
 import messageRoutes from '../modules/messages/messages.route';
+import conversationRoutes from '../modules/converstations/conversations.route';
 
 const router = express.Router();
 
@@ -17,6 +18,10 @@ const moduleRoutes = [
   {
     path: '/messages',
     route: messageRoutes,
+  },
+  {
+    path: '/conversations',
+    route: conversationRoutes,
   },
 ];
 
