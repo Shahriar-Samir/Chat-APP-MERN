@@ -4,5 +4,6 @@ export type TLoginUser = {
 };
 
 export type TJWTPayload = {
+  uid: string;
   email: string;
 };

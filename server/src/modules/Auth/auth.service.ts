@@ -18,6 +18,7 @@ const loginUser = async (payload: TLoginUser) => {
 
   const jwtPayload = {
     email: user.email,
+    uid: user.uid,
   };
 
   const accessToken = generateAccessToken(jwtPayload);
@@ -32,6 +33,7 @@ const signupUser = async (payload: TUser) => {
   const result = await UserModel.create(payload);
   const jwtPayload = {
     email: payload.email,
+    uid: payload.uid,
   };
   const accessToken = generateAccessToken(jwtPayload);
   return { ...result, accessToken };
