@@ -1,5 +1,5 @@
 import { generateAccessToken } from '../../middlewares/auth';
-import { TUser } from '../users/user.interface';
+
 import UserModel from '../users/user.model';
 import { TLoginUser } from './auth.interface';
 
@@ -25,21 +25,6 @@ const loginUser = async (payload: TLoginUser) => {
   return { accessToken };
 };
 
-const signupUser = async (payload: TUser) => {
-  const user = await UserModel.isUserExists(payload.email);
-  if (user) {
-    throw new Error('User already exist');
-  }
-  const result = await UserModel.create(payload);
-  const jwtPayload = {
-    email: payload.email,
-    uid: payload.uid,
-  };
-  const accessToken = generateAccessToken(jwtPayload);
-  return { ...result, accessToken };
-};
-
 export default {
   loginUser,
-  signupUser,
 };
