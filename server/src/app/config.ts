@@ -6,4 +6,5 @@ dotenv.config({ path: path.join(process.cwd(), '.env') });
 export default {
   port: process.env.PORT,
   dbURI: process.env.DB_URI,
+  tokenSecret: process.env.TOKEN_SECRET,
 };
