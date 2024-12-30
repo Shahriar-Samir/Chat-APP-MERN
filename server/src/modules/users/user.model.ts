@@ -1,7 +1,7 @@
 import { model, Schema } from 'mongoose';
-import { TUser } from './user.interface';
+import { TUser, UserModel, UserModel } from './user.interface';
 
-const userSchema = new Schema<TUser>(
+const userSchema = new Schema<TUser, UserModel>(
   {
     uid: {
       type: String,
@@ -25,17 +25,22 @@ const userSchema = new Schema<TUser>(
       type: Boolean,
       required: true,
     },
-    activeStatus: {
-      type: String,
-      enum: ['active', 'inactive'],
-      default: 'active',
-    },
   },
   {
     timestamps: true,
   },
 );
 
-const UserModel = model('User', userSchema);
+userSchema.statics.isUserExists = async function (email) {
+  return await UserModel.findOne({ email });
+};
+userSchema.statics.isPasswordMatched = async function (
+  plainTextPassword,
+  hashedPassword,
+) {
+  return plainTextPassword === hashedPassword;
+};
+
+const UserModel = model<TUser, UserModel>('User', userSchema);
 
 export default UserModel;
